@@ -1,0 +1,8 @@
+<%= f.fields_for :icc_phones,phone_object do |ff| %>
+  city_code:<%= ff.text_field :city_code %>&nbsp;
+  phone_no:<%= ff.text_field :phone_no %>&nbsp;
+  <% unless ff.object.new_record? %>
+    删除<%= ff.check_box :_destroy %>
+  <% end %>
+  <br/>
+<% end %>

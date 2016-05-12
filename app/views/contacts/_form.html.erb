@@ -1,0 +1,39 @@
+<%= form_for(@contact) do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br>
+    <%= f.number_field :age %>
+  </div>
+  <div class="field" style = "padding-left:10px;" >
+    <%- f.object.icc_phones.each do |icc_phone| %>
+      <%= render 'edit_phone',f:f,phone_object:icc_phone %>
+    <% end %>
+  </div>
+  <div class="field" style = "padding-left:10px;" >
+    <%- (5 - f.object.icc_phones.size).times do |index| %>
+       <%= render 'edit_phone',f:f,phone_object:f.object.icc_phones.build %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
